@@ -1,3 +1,5 @@
+// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\TaskListActivity.java
+
 package com.example.taskmaster;
 
 import android.content.Intent;
@@ -68,9 +70,10 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     }
 
     private void loadSampleTasks() {
-        taskList.add(new Task("Completar informe", false, 2));
-        taskList.add(new Task("Responder correos", true, 0));
-        taskList.add(new Task("Comprar víveres", false, 1));
+        // Actualiza las tareas de ejemplo con una fecha límite
+        taskList.add(new Task("Completar informe", false, 2, "2025-09-25"));
+        taskList.add(new Task("Responder correos", true, 0, "2025-09-18"));
+        taskList.add(new Task("Comprar víveres", false, 1, "2025-09-20"));
     }
 
     @Override
@@ -82,8 +85,9 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
                 String taskTitle = data.getStringExtra("TASK_TITLE");
                 boolean isCompleted = data.getBooleanExtra("IS_COMPLETED", false);
                 int priority = data.getIntExtra("PRIORITY", 0);
+                String dueDate = data.getStringExtra("DUE_DATE"); // Obtiene la fecha límite
 
-                Task newTask = new Task(taskTitle, isCompleted, priority);
+                Task newTask = new Task(taskTitle, isCompleted, priority, dueDate);
                 taskList.add(newTask);
                 taskAdapter.notifyItemInserted(taskList.size() - 1);
 

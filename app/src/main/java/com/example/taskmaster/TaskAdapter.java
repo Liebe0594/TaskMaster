@@ -1,12 +1,12 @@
+// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\TaskAdapter.java
+
 package com.example.taskmaster;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageButton;
-import android.widget.Spinner;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,7 +19,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public interface OnItemClickListener {
         void onDeleteClick(int position);
-        void onTaskCompletedClick(int position, boolean isChecked); // Nueva firma para el CheckBox
+        void onTaskCompletedClick(int position, boolean isChecked);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -34,36 +34,26 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_task, parent, false);
-        return new TaskViewHolder(view);
+        return new TaskViewHolder(view, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TaskViewHolder holder, int position) {
         Task task = taskList.get(position);
         holder.tvTaskTitle.setText(task.getTitle());
-        holder.cbTaskCompleted.setChecked(task.isCompleted());
+        holder.checkBoxTask.setChecked(task.isCompleted());
+        holder.tvTaskDueDate.setText("Fecha límite: " + task.getDueDate()); // Establece la fecha límite
 
-        // Adaptador para el Spinner de prioridades
-        ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(
-                holder.itemView.getContext(),
-                R.array.priorities_array,
-                android.R.layout.simple_spinner_item
-        );
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        holder.spPriority.setAdapter(spinnerAdapter);
-        holder.spPriority.setSelection(task.getPriority());
-
-        // Asignar el listener al botón de eliminar
-        if (listener != null) {
-            holder.btnDelete.setOnClickListener(v -> {
-                listener.onDeleteClick(holder.getAdapterPosition());
-            });
-
-            // Asignar el listener al CheckBox
-            holder.cbTaskCompleted.setOnClickListener(v -> {
-                listener.onTaskCompletedClick(holder.getAdapterPosition(), holder.cbTaskCompleted.isChecked());
-            });
+        int priorityIcon = R.drawable.ic_priority_low;
+        switch (task.getPriority()) {
+            case 1:
+                priorityIcon = R.drawable.ic_priority_medium;
+                break;
+            case 2:
+                priorityIcon = R.drawable.ic_priority_high;
+                break;
         }
+        holder.ivPriority.setImageResource(priorityIcon);
     }
 
     @Override
@@ -73,16 +63,25 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public static class TaskViewHolder extends RecyclerView.ViewHolder {
         public TextView tvTaskTitle;
-        public CheckBox cbTaskCompleted;
-        public Spinner spPriority;
-        public ImageButton btnDelete;
+        public CheckBox checkBoxTask;
+        public ImageView ivPriority;
+        public TextView tvTaskDueDate; // Nuevo
 
-        public TaskViewHolder(@NonNull View itemView) {
+        public TaskViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             tvTaskTitle = itemView.findViewById(R.id.tvTaskTitle);
-            cbTaskCompleted = itemView.findViewById(R.id.cbTaskCompleted);
-            spPriority = itemView.findViewById(R.id.spPriority);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
+            checkBoxTask = itemView.findViewById(R.id.checkBoxTask);
+            ivPriority = itemView.findViewById(R.id.ivPriority);
+            tvTaskDueDate = itemView.findViewById(R.id.tvTaskDueDate); // Nuevo
+
+            checkBoxTask.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onTaskCompletedClick(position, ((CheckBox) v).isChecked());
+                    }
+                }
+            });
         }
     }
 }

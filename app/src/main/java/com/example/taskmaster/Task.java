@@ -1,17 +1,22 @@
+// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\Task.java
+
 package com.example.taskmaster;
 
 public class Task {
     private String title;
-    private boolean isCompleted;
-    private int priority; // 0: Baja, 1: Media, 2: Alta
+    private boolean completed;
+    private int priority;
+    private String dueDate; // Nuevo campo
 
-    public Task(String title, boolean isCompleted, int priority) {
+    // Constructor actualizado
+    public Task(String title, boolean completed, int priority, String dueDate) {
         this.title = title;
-        this.isCompleted = isCompleted;
+        this.completed = completed;
         this.priority = priority;
+        this.dueDate = dueDate;
     }
 
-    // Getters y Setters
+    // Getters y Setters existentes
     public String getTitle() {
         return title;
     }
@@ -21,11 +26,11 @@ public class Task {
     }
 
     public boolean isCompleted() {
-        return isCompleted;
+        return completed;
     }
 
     public void setCompleted(boolean completed) {
-        isCompleted = completed;
+        this.completed = completed;
     }
 
     public int getPriority() {
@@ -34,5 +39,14 @@ public class Task {
 
     public void setPriority(int priority) {
         this.priority = priority;
+    }
+
+    // Nuevo Getter y Setter para la fecha límite
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(String dueDate) {
+        this.dueDate = dueDate;
     }
 }
