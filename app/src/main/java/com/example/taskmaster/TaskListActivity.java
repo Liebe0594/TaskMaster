@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -19,6 +20,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     private FloatingActionButton fabAddTask;
 
     private final int ADD_TASK_REQUEST_CODE = 1;
+    private final int REVIEW_TASK_REQUEST_CODE = 2; // Nuevo código de solicitud
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +34,7 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
         loadSampleTasks();
 
         taskAdapter = new TaskAdapter(taskList);
-        taskAdapter.setOnItemClickListener(this); // Asigna el listener
+        taskAdapter.setOnItemClickListener(this);
         rvTaskList.setAdapter(taskAdapter);
 
         fabAddTask = findViewById(R.id.fabAddTask);
@@ -55,22 +57,46 @@ public class TaskListActivity extends AppCompatActivity implements TaskAdapter.O
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == ADD_TASK_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
-            String taskTitle = data.getStringExtra("TASK_TITLE");
-            boolean isCompleted = data.getBooleanExtra("IS_COMPLETED", false);
-            int priority = data.getIntExtra("PRIORITY", 0);
+        if (resultCode == RESULT_OK && data != null) {
+            if (requestCode == ADD_TASK_REQUEST_CODE) {
+                String taskTitle = data.getStringExtra("TASK_TITLE");
+                boolean isCompleted = data.getBooleanExtra("IS_COMPLETED", false);
+                int priority = data.getIntExtra("PRIORITY", 0);
 
-            Task newTask = new Task(taskTitle, isCompleted, priority);
-            taskList.add(newTask);
+                Task newTask = new Task(taskTitle, isCompleted, priority);
+                taskList.add(newTask);
+                taskAdapter.notifyItemInserted(taskList.size() - 1);
 
-            taskAdapter.notifyItemInserted(taskList.size() - 1);
+            } else if (requestCode == REVIEW_TASK_REQUEST_CODE) {
+                float rating = data.getFloatExtra("RATING_VALUE", 0.0f);
+                int position = data.getIntExtra("TASK_POSITION", -1);
+
+                if (position != -1) {
+                    Task task = taskList.get(position);
+                    // Aquí podrías guardar la calificación en tu modelo de datos si tuvieras un campo para ello
+                    // Por ejemplo: task.setRating(rating);
+                    Toast.makeText(this, "Calificación de '" + task.getTitle() + "': " + rating + " estrellas", Toast.LENGTH_SHORT).show();
+                }
+            }
         }
     }
 
     @Override
     public void onDeleteClick(int position) {
-        // Elimina el elemento de la lista y notifica al adaptador
         taskList.remove(position);
         taskAdapter.notifyItemRemoved(position);
+        Toast.makeText(this, "Tarea eliminada", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onTaskCompletedClick(int position, boolean isChecked) {
+        if (isChecked) {
+            // Lanza la actividad de revisión cuando la tarea se marca como completada
+            Task task = taskList.get(position);
+            Intent intent = new Intent(TaskListActivity.this, TaskReviewActivity.class);
+            intent.putExtra("TASK_TITLE", task.getTitle());
+            intent.putExtra("TASK_POSITION", position);
+            startActivityForResult(intent, REVIEW_TASK_REQUEST_CODE);
+        }
     }
 }

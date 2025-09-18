@@ -26,15 +26,6 @@
             android:hint="Ej. Terminar el proyecto de Android"
             android:textSize="24sp" />
 
-        <ImageView
-            android:id="@+id/ivTaskIcon"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_task"
-            android:contentDescription="Icono de tarea" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,44 +56,12 @@
                 android:text="Alta" />
         </RadioGroup>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Progreso:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <ProgressBar
-            android:id="@+id/pbTaskProgress"
-            style="@android:style/Widget.ProgressBar.Horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:progress="50" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Calificación:"
-            android:textSize="18sp"
-            android:textStyle="bold" />
-
-        <RatingBar
-            android:id="@+id/rbTaskRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:numStars="5"
-            android:stepSize="1" />
-
         <Button
             android:id="@+id/btnSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
             android:text="Guardar cambios" />
 
     </LinearLayout>
