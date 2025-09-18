@@ -6,6 +6,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
+    android:background="@drawable/gradient_background"
     tools:context=".TaskReviewActivity">
 
     <TextView
@@ -15,6 +16,7 @@
         android:text="¡Felicidades! ¿Cómo calificarías esta tarea?"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="@android:color/white"
         android:layout_marginBottom="16dp" />
 
     <RatingBar
@@ -23,12 +25,16 @@
         android:layout_height="wrap_content"
         android:numStars="5"
         android:stepSize="1"
-        android:layout_marginBottom="24dp" />
+        android:layout_marginBottom="24dp"
+        android:progressTint="@android:color/white"
+        android:secondaryProgressTint="#E0E0E0" />
 
     <Button
         android:id="@+id/btnSubmitReview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enviar calificación" />
+        android:text="Enviar calificación"
+        android:backgroundTint="#6200EE"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

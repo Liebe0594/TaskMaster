@@ -19,6 +19,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     public interface OnItemClickListener {
         void onDeleteClick(int position);
+        void onTaskCompletedClick(int position, boolean isChecked); // Nueva firma para el CheckBox
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {
@@ -56,6 +57,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         if (listener != null) {
             holder.btnDelete.setOnClickListener(v -> {
                 listener.onDeleteClick(holder.getAdapterPosition());
+            });
+
+            // Asignar el listener al CheckBox
+            holder.cbTaskCompleted.setOnClickListener(v -> {
+                listener.onTaskCompletedClick(holder.getAdapterPosition(), holder.cbTaskCompleted.isChecked());
             });
         }
     }
