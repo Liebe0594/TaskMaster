@@ -1,19 +1,17 @@
-// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\StatsActivity.java
-
 package com.example.taskmaster;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.ProgressBar; // Nueva importación
+import android.widget.ProgressBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class StatsActivity extends AppCompatActivity {
 
     private TextView tvTotalTasks;
     private TextView tvCompletedTasks;
-    private TextView tvProgressLabel; // Nuevo
-    private ProgressBar progressBar; // Nuevo
+    private TextView tvProgressLabel;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +20,8 @@ public class StatsActivity extends AppCompatActivity {
 
         tvTotalTasks = findViewById(R.id.tvTotalTasks);
         tvCompletedTasks = findViewById(R.id.tvCompletedTasks);
-        tvProgressLabel = findViewById(R.id.tvProgressLabel); // Nuevo
-        progressBar = findViewById(R.id.progressBar); // Nuevo
+        tvProgressLabel = findViewById(R.id.tvProgressLabel);
+        progressBar = findViewById(R.id.progressBar);
 
         Intent intent = getIntent();
         if (intent != null) {

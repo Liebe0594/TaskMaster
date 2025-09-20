@@ -1,5 +1,3 @@
-// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\TaskListActivity.java
-
 package com.example.taskmaster;
 
 import android.content.Intent;

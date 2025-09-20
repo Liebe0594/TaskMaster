@@ -1,14 +1,11 @@
-// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\Task.java
-
 package com.example.taskmaster;
 
 public class Task {
     private String title;
     private boolean completed;
     private int priority;
-    private String dueDate; // Nuevo campo
+    private String dueDate;
 
-    // Constructor actualizado
     public Task(String title, boolean completed, int priority, String dueDate) {
         this.title = title;
         this.completed = completed;

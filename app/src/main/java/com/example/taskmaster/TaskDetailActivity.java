@@ -33,10 +33,10 @@ public class TaskDetailActivity extends AppCompatActivity {
         tvDueDate = findViewById(R.id.tvDueDate);
         btnPickDate = findViewById(R.id.btnPickDate);
 
-        // Configura el Spinner con los nuevos diseños personalizados
+        // Configura el Spinner con los diseños
         String[] priorities = {"Baja", "Media", "Alta"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, priorities); // Usa tu diseño personalizado
-        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item); // Usa tu diseño para el menú desplegable
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, priorities); // Usa el diseño personalizado
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item); // Usa el diseño para el menú desplegable
         spPriority.setAdapter(adapter);
 
         btnSave.setOnClickListener(new View.OnClickListener() {

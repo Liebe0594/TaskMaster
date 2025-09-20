@@ -1,5 +1,3 @@
-// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\TaskAdapter.java
-
 package com.example.taskmaster;
 
 import android.view.LayoutInflater;
@@ -65,14 +63,14 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         public TextView tvTaskTitle;
         public CheckBox checkBoxTask;
         public ImageView ivPriority;
-        public TextView tvTaskDueDate; // Nuevo
+        public TextView tvTaskDueDate;
 
         public TaskViewHolder(@NonNull View itemView, final OnItemClickListener listener) {
             super(itemView);
             tvTaskTitle = itemView.findViewById(R.id.tvTaskTitle);
             checkBoxTask = itemView.findViewById(R.id.checkBoxTask);
             ivPriority = itemView.findViewById(R.id.ivPriority);
-            tvTaskDueDate = itemView.findViewById(R.id.tvTaskDueDate); // Nuevo
+            tvTaskDueDate = itemView.findViewById(R.id.tvTaskDueDate);
 
             checkBoxTask.setOnClickListener(v -> {
                 if (listener != null) {
