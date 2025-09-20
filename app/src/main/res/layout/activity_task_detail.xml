@@ -43,43 +43,16 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <RadioGroup
-            android:id="@+id/rgPriority"
+        <Spinner
+            android:id="@+id/spPriority"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/rbLow"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:buttonTint="@android:color/white"
-                android:text="Baja"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-            <RadioButton
-                android:id="@+id/rbMedium"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:buttonTint="@android:color/white"
-                android:text="Media"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-
-            <RadioButton
-                android:id="@+id/rbHigh"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:buttonTint="@android:color/white"
-                android:text="Alta"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-        </RadioGroup>
+            android:background="@drawable/edittext_background"
+            android:backgroundTint="#EFEDED"
+            android:padding="8dp"
+            android:popupBackground="#4A00B7"
+            android:spinnerMode="dropdown" />
 
         <TextView
             android:layout_width="wrap_content"

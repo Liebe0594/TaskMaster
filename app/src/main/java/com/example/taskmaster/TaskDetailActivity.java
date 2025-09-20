@@ -1,5 +1,3 @@
-// Archivo: C:\Users\felip\AndroidStudioProjects\TaskMaster\app\src\main\java\com\example\taskmaster\TaskDetailActivity.java
-
 package com.example.taskmaster;
 
 import android.app.DatePickerDialog;
@@ -8,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
@@ -17,12 +15,12 @@ import java.util.Calendar;
 public class TaskDetailActivity extends AppCompatActivity {
 
     private EditText etTaskTitle;
-    private RadioGroup rgPriority;
+    private Spinner spPriority;
     private Button btnSave;
-    private TextView tvDueDate; // Nuevo
-    private Button btnPickDate; // Nuevo
+    private TextView tvDueDate;
+    private Button btnPickDate;
 
-    private String selectedDueDate; // Variable para guardar la fecha
+    private String selectedDueDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +28,16 @@ public class TaskDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_task_detail);
 
         etTaskTitle = findViewById(R.id.etTaskTitle);
-        rgPriority = findViewById(R.id.rgPriority);
+        spPriority = findViewById(R.id.spPriority);
         btnSave = findViewById(R.id.btnSave);
-        tvDueDate = findViewById(R.id.tvDueDate); // Nuevo
-        btnPickDate = findViewById(R.id.btnPickDate); // Nuevo
+        tvDueDate = findViewById(R.id.tvDueDate);
+        btnPickDate = findViewById(R.id.btnPickDate);
+
+        // Configura el Spinner con los nuevos diseños personalizados
+        String[] priorities = {"Baja", "Media", "Alta"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, priorities); // Usa tu diseño personalizado
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item); // Usa tu diseño para el menú desplegable
+        spPriority.setAdapter(adapter);
 
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +46,6 @@ public class TaskDetailActivity extends AppCompatActivity {
             }
         });
 
-        // Configurar el Date Picker
         btnPickDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,22 +74,15 @@ public class TaskDetailActivity extends AppCompatActivity {
 
         Intent intent = new Intent();
         intent.putExtra("TASK_TITLE", title);
-        intent.putExtra("IS_COMPLETED", false); // Siempre se crea como no completada
+        intent.putExtra("IS_COMPLETED", false);
         intent.putExtra("PRIORITY", priority);
-        intent.putExtra("DUE_DATE", selectedDueDate); // Pasa la fecha límite
+        intent.putExtra("DUE_DATE", selectedDueDate);
         setResult(RESULT_OK, intent);
         finish();
     }
 
     private int getSelectedPriority() {
-        int selectedId = rgPriority.getCheckedRadioButtonId();
-        if (selectedId == R.id.rbLow) {
-            return 0;
-        } else if (selectedId == R.id.rbMedium) {
-            return 1;
-        } else if (selectedId == R.id.rbHigh) {
-            return 2;
-        }
-        return 0; // Default a baja
+        int selectedIndex = spPriority.getSelectedItemPosition();
+        return selectedIndex;
     }
 }
