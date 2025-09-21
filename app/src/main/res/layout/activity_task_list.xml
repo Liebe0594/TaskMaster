@@ -4,26 +4,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:background="@drawable/gradient_background"
+    android:padding="16dp"
     tools:context=".TaskListActivity">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:text="Mis Tareas"
-        android:textSize="32sp"
-        android:textStyle="bold"
         android:textColor="@android:color/white"
-        android:layout_centerHorizontal="true" />
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:id="@+id/tvEmptyList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="No hay tareas aún.\n¡Añade la primera!"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tvTitle"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="80dp" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabViewStats"
@@ -31,10 +44,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_chart"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="Ver Estadísticas"
-        android:backgroundTint="#6200EE"
+        android:src="@drawable/ic_chart"
+        app:backgroundTint="#6200EE"
         app:tint="@android:color/white" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -43,10 +57,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="16dp"
-        android:src="@drawable/ic_add"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:contentDescription="Agregar Tarea"
-        android:backgroundTint="#6200EE"
+        android:src="@drawable/ic_add"
+        app:backgroundTint="#6200EE"
         app:tint="@android:color/white" />
 
 </RelativeLayout>
